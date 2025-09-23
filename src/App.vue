@@ -1,38 +1,64 @@
+import './style/web/contactanosweb.css'
+import './style/movil/contactanosmobil.css'
 <script setup>
 import { ref, onMounted, watch, onUnmounted } from 'vue'
-import Contactanos from './components/contactanos.vue'
 import './style.css'
 import './style-mobil.css'
 
-const isMenuOpen = ref(false)
-const isShopSubmenuOpen = ref(false)
+const menuAbierto = ref(false)
+const submenuTiendaAbierto = ref(false)
 
-const products = ref([
-  { id: 1, name: 'Producto 1', price: '€19.99', image: 'https://via.placeholder.com/250', description: 'Esta es una breve descripción del producto 1, destacando sus características principales.' },
-  { id: 2, name: 'Producto 2', price: '€29.99', image: 'https://via.placeholder.com/250', description: 'Descripción detallada para el producto 2. Es excelente y de alta calidad.' },
-  { id: 3, name: 'Producto 3', price: '€39.99', image: 'https://via.placeholder.com/250', description: 'El producto 3 ofrece una solución innovadora y duradera para sus necesidades.' },
-  { id: 4, name: 'Producto 4', price: '€49.99', image: 'https://via.placeholder.com/250', description: 'No te pierdas el producto 4, la mejor opción en el mercado actual.' },
+const productos = ref([
+  { id: 1, nombre: 'Producto 1', precio: '€19.99', imagen: 'https://via.placeholder.com/250', descripcion: 'Esta es una breve descripción del producto 1, destacando sus características principales.' },
+  { id: 2, nombre: 'Producto 2', precio: '€29.99', imagen: 'https://via.placeholder.com/250', descripcion: 'Descripción detallada para el producto 2. Es excelente y de alta calidad.' },
+  { id: 3, nombre: 'Producto 3', precio: '€39.99', imagen: 'https://via.placeholder.com/250', descripcion: 'El producto 3 ofrece una solución innovadora y duradera para sus necesidades.' },
+  { id: 4, nombre: 'Producto 4', precio: '€49.99', imagen: 'https://via.placeholder.com/250', descripcion: 'No te pierdas el producto 4, la mejor opción en el mercado actual.' },
 ])
 
-const testimonials = ref([
-  { id: 1, text: '¡Excelente servicio y productos de alta calidad! Totalmente recomendado.', author: 'Ana Pérez', image: 'https://i.pravatar.cc/100?u=ana' },
-  { id: 2, text: 'La maquinaria que compré superó mis expectativas. El soporte técnico es inmejorable.', author: 'Carlos Gómez', image: 'https://i.pravatar.cc/100?u=carlos' },
-  { id: 3, text: 'Muy satisfecho con la compra. La entrega fue rápida y el personal muy amable.', author: 'Lucía Fernández', image: 'https://i.pravatar.cc/100?u=lucia' }
+import portadaNova from './assets/portada-nova.jpg'
+import portada2 from './assets/portada2.png'
+import portada3 from './assets/portada3.png'
+const portadas = [
+  { src: portadaNova, alt: 'Portada Nova' },
+  { src: portada2, alt: 'Portada 2' },
+  { src: portada3, alt: 'Portada 3' }
+]
+const indicePortada = ref(0)
+let intervaloCarrusel = null
+
+function siguientePortada() {
+  indicePortada.value = (indicePortada.value + 1) % portadas.length
+}
+function anteriorPortada() {
+  indicePortada.value = (indicePortada.value - 1 + portadas.length) % portadas.length
+}
+
+onMounted(() => {
+  intervaloCarrusel = setInterval(siguientePortada, 4000)
+})
+onUnmounted(() => {
+  clearInterval(intervaloCarrusel)
+})
+
+const testimonios = ref([
+  { id: 1, texto: '¡Excelente servicio y productos de alta calidad! Totalmente recomendado.', autor: 'Ana Pérez', imagen: 'https://i.pravatar.cc/100?u=ana' },
+  { id: 2, texto: 'La maquinaria que compré superó mis expectativas. El soporte técnico es inmejorable.', autor: 'Carlos Gómez', imagen: 'https://i.pravatar.cc/100?u=carlos' },
+  { id: 3, texto: 'Muy satisfecho con la compra. La entrega fue rápida y el personal muy amable.', autor: 'Lucía Fernández', imagen: 'https://i.pravatar.cc/100?u=lucia' }
 ])
 
-function toggleMenu() {
-  isMenuOpen.value = !isMenuOpen.value
-  if (!isMenuOpen.value) {
-    isShopSubmenuOpen.value = false
+function alternarMenu() {
+  menuAbierto.value = !menuAbierto.value
+  if (!menuAbierto.value) {
+    submenuTiendaAbierto.value = false
   }
 }
 
-function toggleShopSubmenu() {
-  isShopSubmenuOpen.value = !isShopSubmenuOpen.value
+function alternarSubmenuTienda() {
+  submenuTiendaAbierto.value = !submenuTiendaAbierto.value
 }
 
-watch(isMenuOpen, (isOpen) => {
-  if (isOpen) {
+watch(menuAbierto, (abierto) => {
+  if (abierto) {
     document.body.classList.add('no-scroll');
   } else {
     document.body.classList.remove('no-scroll');
@@ -44,34 +70,31 @@ onUnmounted(() => {
 })
 
 onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add('is-visible');
+        observador.unobserve(entrada.target);
       }
     });
   }, {
     threshold: 0.1
   });
 
-  document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-    observer.observe(el);
+  document.querySelectorAll('.animar-al-desplazar').forEach((el) => {
+    observador.observe(el);
   });
 
-  const header = document.querySelector('header');
+  const encabezado = document.querySelector('header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-      header.classList.add('scrolled');
+      encabezado.classList.add('desplazado');
     } else {
-      header.classList.remove('scrolled');
+      encabezado.classList.remove('desplazado');
     }
   });
 
-  // Disable right-click context menu
   document.addEventListener('contextmenu', (e) => e.preventDefault());
-  
-  // Disable common keyboard shortcuts
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && (e.key === 'c' || e.key === 'a' || e.key === 's' || e.key === 'u')) {
       e.preventDefault();
@@ -84,62 +107,105 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="overlay-menu" :class="{ 'is-active': isMenuOpen }" @click="toggleMenu"></div>
-  <header>
-    <nav>
-      <img src="./assets/logo-nova.png" alt="Nova Logo" class="logo" />
-      <button class="menu-hamburguesa" @click="toggleMenu" :class="{ 'is-active': isMenuOpen }">
+  <div class="superposicion-menu" :class="{ 'activo': menuAbierto }" @click="alternarMenu"></div>
+  <encabezado>
+    <navegacion-encabezado>
+      <logo-encabezado>
+        <img src="./assets/icono_savreh.png" alt="Icono Savreh" class="logo" width="90" height="30" />
+      </logo-encabezado>
+
+      <!-- Menú web solo escritorio -->
+      <ul class="enlaces-navegacion-web solo-escritorio">
+        <li><a href="#" class="enlace-menu">Inicio</a></li>
+        <li class="elemento-con-desplegable" tabindex="0">
+          <a href="#" class="enlace-menu">Tienda <span class="flecha-desplegable">&#9662;</span></a>
+          <ul class="submenu-desplegable">
+            <li><a href="#" class="enlace-submenu">Maquinaria Agrícola</a></li>
+            <li><a href="#" class="enlace-submenu">Equipos de Energía Solar</a></li>
+            <li><a href="#" class="enlace-submenu">Acabados</a></li>
+            <li><a href="#" class="enlace-submenu">Maquinaria Industrial</a></li>
+            <li><a href="#" class="enlace-submenu">Otros</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#contactanos" class="enlace-menu">Contáctanos</a>
+        </li>
+        <li><a href="#sobre-nosotros" class="enlace-menu">Sobre Nosotros</a></li>
+      </ul>
+      <!-- Menú móvil solo móvil -->
+      <button class="menu-hamburguesa solo-movil" @click="alternarMenu" :class="{ 'activo': menuAbierto }" aria-label="Abrir menú" tabindex="0">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <ul class="enlaces-navegacion" :class="{ 'is-active': isMenuOpen }">
-        <div class="menu-header">
-          <img src="./assets/logo-nova.png" alt="Nova Logo" class="logo" />
-          <span class="menu-title">Menú</span>
+      <ul class="enlaces-navegacion-movil solo-movil" :class="{ 'activo': menuAbierto }">
+        <div class="encabezado-menu-movil">
+          <img src="./assets/icono_savreh.png" alt="Icono Savreh" class="logo" width="70" height="24" />
+          <span class="titulo-menu-movil">Menú</span>
         </div>
-        <li @click="toggleMenu"><a href="#">Inicio</a></li>
-        <li class="elemento-con-dropdown" :class="{ 'submenu-abierto': isShopSubmenuOpen }">
-          <a href="#" @click.prevent="toggleShopSubmenu">Tienda <span class="flecha-dropdown">&#9662;</span></a>
-          <ul class="submenu-dropdown" :class="{ 'is-active': isShopSubmenuOpen }">
-            <li @click="toggleMenu"><a href="#">Maquinaria Agrícola</a></li>
-            <li @click="toggleMenu"><a href="#">Equipos de Energía Solar</a></li>
-            <li @click="toggleMenu"><a href="#">Acabados</a></li>
-            <li @click="toggleMenu"><a href="#">Maquinaria Industrial</a></li>
-            <li @click="toggleMenu"><a href="#">Otros</a></li>
+        <li @click="alternarMenu"><a href="#" class="enlace-menu-movil">Inicio</a></li>
+        <li class="elemento-con-desplegable-movil" :class="{ 'submenu-abierto-movil': submenuTiendaAbierto }">
+          <a href="#" @click.prevent="alternarSubmenuTienda" class="enlace-menu-movil">Tienda <span class="flecha-desplegable-movil">&#9662;</span></a>
+          <ul class="submenu-desplegable-movil" :class="{ 'activo': submenuTiendaAbierto }">
+            <li @click="alternarMenu"><a href="#" class="enlace-submenu-movil">Maquinaria Agrícola</a></li>
+            <li @click="alternarMenu"><a href="#" class="enlace-submenu-movil">Equipos de Energía Solar</a></li>
+            <li @click="alternarMenu"><a href="#" class="enlace-submenu-movil">Acabados</a></li>
+            <li @click="alternarMenu"><a href="#" class="enlace-submenu-movil">Maquinaria Industrial</a></li>
+            <li @click="alternarMenu"><a href="#" class="enlace-submenu-movil">Otros</a></li>
           </ul>
         </li>
-        <li @click="toggleMenu"><a href="#contactanos">Contáctanos</a></li>
-        <li @click="toggleMenu"><a href="#sobre-nosotros">Sobre Nosotros</a></li>
-        <div class="menu-footer">
-          <div class="social-links">
-            <a href="#" target="_blank" class="social-link">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" target="_blank" class="social-link">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-          </div>
+        <li @click="alternarMenu"><a href="#contactanos" class="enlace-menu-movil">Contáctanos</a></li>
+        <li @click="alternarMenu"><a href="#sobre-nosotros" class="enlace-menu-movil">Sobre Nosotros</a></li>
+        <div class="pie-menu-movil">
           <div class="copyright">
             <p>&copy; 2024 SAVREH S.A.</p>
           </div>
         </div>
       </ul>
-    </nav>
-  </header>
-  <div class="carrusel-container">
-    <div class="carrusel-diapositivas">
-      <img src="./assets/portada-nova.jpg" alt="Portada Nova" class="portada" />
-      <img src="./assets/portada-dos-nova.png" alt="Portada Dos Nova" class="portada" />
-      <img src="./assets/portada-nova.jpg" alt="Portada Nova" class="portada" />
+    </navegacion-encabezado>
+  </encabezado>
+  <div class="contenedor-carrusel">
+    <div class="diapositivas-carrusel">
+      <img
+        v-for="(portada, idx) in portadas"
+        :key="portada.src"
+        :src="portada.src"
+        :alt="portada.alt"
+        class="portada"
+        loading="lazy"
+        :style="{ opacity: indicePortada === idx ? 1 : 0, zIndex: indicePortada === idx ? 2 : 1, transition: 'opacity 0.7s' }"
+      />
+      <button class="carrusel-control carrusel-anterior" @click="anteriorPortada" aria-label="Anterior">&#10094;</button>
+      <button class="carrusel-control carrusel-siguiente" @click="siguientePortada" aria-label="Siguiente">&#10095;</button>
+      <div class="carrusel-indicadores">
+        <span
+          v-for="(portada, idx) in portadas"
+          :key="'indicador-' + idx"
+          :class="['carrusel-indicador', { activo: indicePortada === idx }]"
+          @click="indicePortada = idx"
+        ></span>
+      </div>
     </div>
-    <div class="hero-texto">
-      <p>Soluciones Innovadoras para la Industria y el Agro.</p>
+    <div class="texto-hero">
+      <p>Soluciones Innovadoras para la Industria y el Agro</p>
     </div>
   </div>
-  <main>
-    <div class="info-section animate-on-scroll fade-in-up" id="sobre-nosotros">
-      <div class="info-texto">
+
+  <div class="fila-portada-extra">
+    <div class="texto-portada-extra">
+      <div class="info-ts754">
+        <h2>Maquinaria Agrícola TS-754</h2>
+        <p class="productos-vendidos">Más de 20,000 productos vendidos</p>
+        <button class="boton-mas-info">Más información</button>
+      </div>
+    </div>
+    <div class="imagen-portada-extra">
+      <img src="./assets/TS-754-IMAGEN1.png" alt="Imagen TS-754" class="portada-extra" loading="lazy" />
+    </div>
+  </div>
+  <div class="principal">
+    <div class="seccion-info animar-al-desplazar aparecer-arriba" id="sobre-nosotros">
+      <div class="texto-info">
         <h2>Sobre Nosotros</h2>
         <p>
           En SAVREH S.A. Trabajamos duro para ofrecerte los productos de mejor calidad.
@@ -147,53 +213,70 @@ onMounted(() => {
         <p>
           Desde 2003, SAVREH S.A. se especializa en la importación y distribución de equipos industrial. Ubicada en Lasso provincia de Cotopaxi, dispone de una amplia gama de implementos y maquinarias agrícolas, paneles de aluminio, calefones y lámpara solares. Todos los equipos importados por SAVREH poseen un amplio stock de repuestos, así como técnicos calificados, comprometidos en brindar un buen servicio. Nuestros productos cuentan con garantía y provienen de empresas con Certificación de Calidad ISO 9001.
         </p>
-        
         <h3>MISIÓN</h3>
         <p>
           SAVREH S.A. fue creada en 2003, dedicada a la importación y distribución de maquinaria agrícola, paneles de aluminio, calefones, lámparas solares; con precios competitivos en el mercado. Nuestros proveedores cuentan con certificación ISO 9001, garantizando así la calidad de los equipos.
         </p>
-        
         <h3>VISIÓN</h3>
         <p>
           Ser reconocida a nivel nacional como una empresa importadora, que busca satisfacer las necesidades de sus clientes, con un amplio stock de equipos y repuestos, con técnicas calificadas y comprometidos en brindar un buen servicio.
         </p>
-        
         <h3>NUESTRO EQUIPO</h3>
         <p>
           Contamos con un equipo multidisciplinario de expertos profesionales que trabajan bajo los más exigentes parámetros de calidad, convirtiéndose en un apoyo estratégico para nuestros clientes. Somos especialistas en varios segmentos de negocios, tenemos un conocimiento detallado de las empresas y sus operaciones, lo que asegura apoyo y soporte técnico especializado no sólo a nuestros equipos sino a nuestros clientes.
         </p>
       </div>
     </div>
-
-    <div class="grilla-productos animate-on-scroll fade-in-up">
-      <div v-for="(product, index) in products" :key="product.id" class="tarjeta-producto animate-on-scroll" :style="{ transitionDelay: `${index * 100}ms` }">
-        <img :src="product.image" :alt="product.name" class="imagen-producto"/>
-        <div class="producto-info">
-          <h3>{{ product.name }}</h3>
-          <p class="descripcion">{{ product.description }}</p>
-          <p class="precio">{{ product.price }}</p>
-          <button>Más información</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="seccion-testimonios animate-on-scroll fade-in-up">
-      <h2 class="animate-on-scroll">Lo que dicen nuestros clientes</h2>
+    <!-- Eliminada la grilla de productos y detalles -->
+    <div class="seccion-testimonios animar-al-desplazar aparecer-arriba">
+      <h2 class="animar-al-desplazar">Lo que dicen nuestros clientes</h2>
       <div class="contenedor-testimonios">
-        <div v-for="(testimonial, index) in testimonials" :key="testimonial.id" class="tarjeta-testimonio animate-on-scroll" :style="{ transitionDelay: `${index * 150}ms` }">
-          <img :src="testimonial.image" :alt="testimonial.author" class="imagen-testimonio"/>
-          <p class="texto-testimonio">"{{ testimonial.text }}"</p>
-          <p class="autor-testimonio">- {{ testimonial.author }}</p>
+        <div v-for="(testimonio, indice) in testimonios" :key="testimonio.id" class="tarjeta-testimonio animar-al-desplazar" :style="{ transitionDelay: `${indice * 180}ms` }">
+          <img :src="testimonio.imagen" :alt="testimonio.autor" class="imagen-testimonio" loading="lazy"/>
+          <p class="texto-testimonio">"{{ testimonio.texto }}"</p>
+          <p class="autor-testimonio">- {{ testimonio.autor }}</p>
         </div>
       </div>
     </div>
-
     <Contactanos />
-  </main>
-  <footer>
-    <p>Copyright &copy; SAVREH powered by SAVREH</p>
-  </footer>
-  <a href="https://wa.link/dgy5gs" target="_blank" rel="noopener noreferrer" class="boton-flotante">
+    <!-- Sección Contáctanos -->
+    <div class="seccion-contactanos animar-al-desplazar aparecer-arriba" id="contactanos">
+      <div class="contactanos-info">
+        <h2>Contáctanos</h2>
+        <p>¿Tienes preguntas o necesitas asesoría personalizada? Nuestro equipo está listo para ayudarte.</p>
+        <div class="contactanos-datos">
+          <div class="contacto-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>Teléfono: <a href="tel:+593999999999">+593 99 999 9999</a></span>
+          </div>
+          <div class="contacto-item">
+            <i class="fas fa-envelope"></i>
+            <span>Email: <a href="mailto:info@savreh.com">info@savreh.com</a></span>
+          </div>
+          <div class="contacto-item">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp: <a href="https://wa.link/dgy5gs" target="_blank" rel="noopener">Contáctanos</a></span>
+          </div>
+        </div>
+        <form class="formulario-contacto" @submit.prevent>
+          <input type="text" placeholder="Nombre" required />
+          <input type="email" placeholder="Correo electrónico" required />
+          <textarea placeholder="Mensaje" rows="4" required></textarea>
+          <button type="submit" class="boton-enviar">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <pie-pagina>
+    <pie-social>
+      <a href="#" target="_blank" class="enlace-social"><i class="fab fa-instagram"></i></a>
+      <a href="#" target="_blank" class="enlace-social"><i class="fab fa-facebook-f"></i></a>
+    </pie-social>
+    <div class="copyright-pie">
+      <p>Copyright &copy; SAVREH powered by SAVREH</p>
+    </div>
+  </pie-pagina>
+  <a href="https://wa.link/dgy5gs" target="_blank" rel="noopener noreferrer" class="boton-flotante" aria-label="Contactar por WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 </template>

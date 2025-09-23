@@ -1,3 +1,9 @@
+  .portada-extra {
+    height: 140vh !important;
+    width: 100vw !important;
+    object-fit: cover;
+    display: block;
+  }
 @media (max-width: 768px) {
   nav {
     flex-direction: row-reverse;
@@ -27,20 +33,21 @@
     width: 50px;
     height: 50px;
     bottom: 1.5rem;
-    right: 1.5rem;
-  }
 
-  .boton-flotante i {
-    font-size: 26px;
   }
 
   main {
     padding: 1rem;
     max-width: 100%;
     overflow-x: hidden;
+    margin-top: 90vh;
+    position: relative;
+    z-index: 2;
   }
 
-  .info-section {
+
+
+  .seccion-info {
     flex-direction: column;
     padding: 2rem 1rem;
     text-align: left;
@@ -50,13 +57,13 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   }
 
-  .info-section.animate-on-scroll {
+  .seccion-info.animar-al-desplazar {
     opacity: 0;
     transform: translateY(60px) scale(0.85) rotateX(10deg);
     transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  .info-section.animate-on-scroll.is-visible {
+  .seccion-info.animar-al-desplazar.is-visible {
     opacity: 1;
     transform: translateY(0) scale(1) rotateX(0deg);
   }
@@ -147,10 +154,16 @@
     text-align: justify;
   }
 
+
+
   .carrusel-container {
-    height: 50vh;
-    min-height: 300px;
-    max-height: 400px;
+    height: 90vh;
+    min-height: 90vh;
+    max-height: 90vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
   }
 
   .hero-texto {
@@ -169,14 +182,14 @@
   }
 
   .seccion-testimonios {
-    background: #1f2937;
+    background: linear-gradient(135deg, var(--bg-color) 0%, #e5e5e7 100%);
   }
 
   .seccion-testimonios h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    text-shadow: none;
   }
 
 
@@ -195,6 +208,8 @@
     gap: 2rem;
   }
 
+
+  /* CONTACTANOS MOVIL */
   .seccion-contacto {
     padding: 2rem 1rem;
   }
@@ -220,6 +235,8 @@
   .overlay-menu.is-active {
     opacity: 1;
     pointer-events: auto;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .menu-hamburguesa {
@@ -312,25 +329,23 @@
     text-align: center;
   }
 
-  .social-links {
+
+  .footer-social {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
     margin-bottom: 1rem;
   }
 
-  .social-link {
+  .footer-social .social-link {
     color: #6c757d;
-    transition: color 0.2s ease;
+    font-size: 1.6rem;
+    transition: color 0.2s;
     padding: 0.5rem;
   }
 
-  .social-link i {
-    font-size: 1.2rem;
-  }
-
-  .social-link:hover {
-    color: #42b883;
+  .footer-social .social-link:hover {
+    color: var(--primary-color);
   }
 
   .copyright p {
@@ -361,7 +376,7 @@
 
   .enlaces-navegacion a:hover {
     background-color: #f8f9fa;
-    color: #42b883;
+    color: var(--primary-color);
   }
 
   .elemento-con-dropdown .flecha-dropdown {
@@ -408,7 +423,7 @@
 
   .submenu-dropdown li a:hover {
     background-color: #e9ecef;
-    color: #42b883 !important;
+    color: var(--primary-color) !important;
   }
 
   .animate-on-scroll {
@@ -432,16 +447,17 @@
 
   .boton-flotante:hover {
     transform: scale(1.1);
+    background-color: #128c7e;
   }
 
   .grilla-productos {
-    gap: 1.5rem;
-    background: #f8fafc;
-    padding: 2rem 1rem;
-    border-radius: 12px;
-    margin: 1.5rem 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e2e8f0;
+    gap: 2rem;
+    background: var(--bg-color);
+    padding: 3rem 1rem;
+    border-radius: var(--border-radius);
+    margin: 2rem 0;
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .tarjeta-producto {
@@ -519,5 +535,33 @@
 
   .tiktok-mobile {
     display: list-item !important;
+  }
+
+
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    width: 100vw;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    height: 70px;
+  }
+
+  .logo {
+    height: 40px;
+    width: auto;
+    margin-right: 0.5rem;
+  }
+
+  .menu-hamburguesa.mobile-only {
+    margin-left: auto;
   }
 }
