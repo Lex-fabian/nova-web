@@ -133,10 +133,11 @@ onMounted(() => {
         <li><a href="#sobre-nosotros" class="enlace-menu">Sobre Nosotros</a></li>
       </ul>
       <!-- Menú móvil solo móvil -->
+      <!-- Menú hamburguesa móvil visual -->
       <button class="menu-hamburguesa solo-movil" @click="alternarMenu" :class="{ 'activo': menuAbierto }" aria-label="Abrir menú" tabindex="0">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span :style="{ transform: menuAbierto ? 'rotate(45deg) translate(6px, 6px)' : 'none', background: menuAbierto ? '#2563eb' : '#031641' }"></span>
+        <span :style="{ opacity: menuAbierto ? 0 : 1, background: menuAbierto ? '#2563eb' : '#031641' }"></span>
+        <span :style="{ transform: menuAbierto ? 'rotate(-45deg) translate(7px, -7px)' : 'none', background: menuAbierto ? '#2563eb' : '#031641' }"></span>
       </button>
       <ul class="enlaces-navegacion-movil solo-movil" :class="{ 'activo': menuAbierto }">
         <div class="encabezado-menu-movil">

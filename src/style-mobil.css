@@ -13,6 +13,10 @@
     display: flex;
   }
 
+  .solo-movil {
+    display: flex !important;
+  }
+
   .overlay-menu {
     display: block;
   }
@@ -565,3 +569,25 @@
     margin-left: auto;
   }
 }
+
+  /* Botón flotante WhatsApp móvil */
+  .boton-flotante {
+    width: 50px !important;
+    height: 50px !important;
+    right: 1.2rem !important;
+    bottom: 1.2rem !important;
+    font-size: 2rem !important;
+    box-shadow: 0 2px 10px rgba(37,99,235,0.18);
+  }
+  .boton-flotante i.fab.fa-whatsapp {
+    font-size: 2rem !important;
+  }
+
+  /* Botón enviar mensaje móvil */
+  .boton-enviar {
+    width: 100%;
+    min-width: 0;
+    font-size: 1.1rem !important;
+    padding: 0.8rem 0 !important;
+    margin-top: 0.7rem !important;
+  }
