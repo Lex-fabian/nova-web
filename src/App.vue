@@ -5,11 +5,11 @@
 						<img src="./assets/icono_savreh.png" alt="Icono Savreh" class="logo" style="height:32px;max-width:90px;margin-right:1.2rem;" />
 					</div>
 				<ul class="enlaces-navegacion solo-escritorio" style="height:32px;align-items:center;">
-					<li><a href="#" class="enlace-menu">Inicio</a></li>
+					<li><a href="#" class="enlace-menu" @click.prevent="scrollToInicio">Inicio</a></li>
 					<li class="dropdown-item">
 						<a href="#" class="enlace-menu">Tienda <span class="dropdown-arrow">▼</span></a>
 						<ul class="dropdown-submenu">
-							<li><a href="#" class="submenu-link">Maquinaria Agrícola</a></li>
+							<li><a href="#" class="submenu-link" @click.prevent="mostrarMaquinariaAgricola = true">Maquinaria Agrícola</a></li>
 							<li><a href="#" class="submenu-link">Maquinaria Industrial</a></li>
 							<li><a href="#" class="submenu-link">Equipos de Energía Solar</a></li>
 							<li><a href="#" class="submenu-link">Acabados</a></li>
@@ -17,7 +17,7 @@
 						</ul>
 					</li>
 					<li><a href="#contacto" class="enlace-menu" @click.prevent="scrollToContacto">Contáctanos</a></li>
-					<li><a href="#" class="enlace-menu">Sobre Nosotros</a></li>
+					<li><a href="#" class="enlace-menu" @click.prevent="scrollToSobreNosotros">Sobre Nosotros</a></li>
 				</ul>
 		</nav>
 		</header>
@@ -35,18 +35,30 @@
 			</div>
 		</div>
 		<div class="fila-portada-extra">
-			<div class="texto-portada-extra">
-				<div class="info-ts754">
-					<h2>MAQUINARIA INDUSTRIAL</h2>
-					<p class="productos-vendidos">Más de 20,000 ventas</p>
-					<h3>TS 754</h3>
-					  <button class="boton-mas-info" @click="mostrarMaquinaria = true">Más información</button>
-				</div>
+					<div class="texto-portada-extra">
+						<div class="info-ts754" style="align-items:center;text-align:center;">
+							<h2>MAQUINARIA INDUSTRIAL</h2>
+							<p class="productos-vendidos">Más de 20,000 ventas</p>
+							<button class="boton-mas-info" @click="mostrarMaquinaria = true">Más información</button>
+						</div>
+					</div>
+					<div class="imagen-portada-extra">
+						<img src="./assets/TS-754.png" alt="TS-754" class="portada-extra" style="max-width:340px;max-height:340px;display:block;margin:0 auto;" loading="lazy" />
+					</div>
 			</div>
-			<div class="imagen-portada-extra">
-				<img src="./assets/TS-754-IMAGEN1.png" alt="TS-754" class="portada-extra" loading="lazy" />
-			</div>
-			</div>
+					<div class="fila-portada-extra">
+						<div class="imagen-portada-extra">
+							<img src="./assets/batidora1.png" alt="Batidora Panadería" class="portada-extra" style="max-width:340px;max-height:340px;display:block;margin:0 auto;" loading="lazy" />
+						</div>
+						<div class="texto-portada-extra">
+							<div class="info-ts754" style="align-items:center;text-align:center;">
+								<h2>PANADERÍA</h2>
+								<p class="productos-vendidos">Más de 13,000 ventas</p>
+								<button class="boton-mas-info">Más información</button>
+							</div>
+						</div>
+					</div>
+			<MaqAgriPage v-if="mostrarMaquinariaAgricola" :titulo="'Maquinaria Agrícola TS-754'" :imagen="'/src/assets/TS-754-IMAGEN1.png'" @close="mostrarMaquinariaAgricola = false" />
 			<MaqAgriPage v-if="mostrarMaquinaria" :titulo="'Maquinaria Industrial TS-754'" :imagen="'/src/assets/TS-754-IMAGEN1.png'" @close="mostrarMaquinaria = false" />
 
 			<!-- Sección Testimonios Clientes -->
@@ -108,10 +120,6 @@
 				</form>
 			</section>
 
-			<!-- Botón flotante WhatsApp -->
-			<a href="https://api.whatsapp.com/send?phone=593985529839&text=Hola%20quisiera%20mas%20informaci%C3%B3n%20acerca%20de..." class="floating-button" target="_blank" aria-label="WhatsApp">
-				<i class="fab fa-whatsapp"></i>
-			</a>
 
 			<!-- Pie de página -->
 			<footer class="footer-copyright">
@@ -138,6 +146,7 @@ const indicePortada = ref(0)
 let intervaloCarrusel = null
 
 const mostrarMaquinaria = ref(false)
+const mostrarMaquinariaAgricola = ref(false)
 
 function siguientePortada() {
 	indicePortada.value = (indicePortada.value + 1) % portadas.length
@@ -146,11 +155,21 @@ function anteriorPortada() {
 	indicePortada.value = (indicePortada.value - 1 + portadas.length) % portadas.length
 }
 
+function scrollToInicio() {
+	window.scrollTo({ top: 0, behavior: 'smooth' })
+	mostrarMaquinariaAgricola.value = false
+}
 function scrollToContacto() {
-  const contacto = document.getElementById('contacto')
-  if (contacto) {
-	contacto.scrollIntoView({ behavior: 'smooth' })
-  }
+	const contacto = document.getElementById('contacto')
+	if (contacto) {
+		contacto.scrollIntoView({ behavior: 'smooth' })
+	}
+}
+function scrollToSobreNosotros() {
+	const sobre = document.getElementById('sobre-nosotros')
+	if (sobre) {
+		sobre.scrollIntoView({ behavior: 'smooth' })
+	}
 }
 
 onMounted(() => {
