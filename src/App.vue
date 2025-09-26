@@ -1,7 +1,12 @@
 <template>
-	<Cabeza />
+	<Cabeza
+    @ir-inicio="scrollToInicio"
+    @abrir-maquinaria-agricola="handleAbrirMaquinariaAgricola"
+    @abrir-maquinaria-industrial="handleAbrirMaquinariaIndustrial"
+    @abrir-panaderia="handleAbrirPanaderia"
+  />
 
-	<main style="margin-top:64px;">
+	<main style="margin-top:64px; background: #f3f4f6;">
 		<Portada />
 
 		<Maquinas @open-maquinaria="mostrarMaquinaria = true" />
@@ -43,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import Cabeza from './components/cabeza.vue'
 import MaqAgriPage from './page/maq_agricola_page.vue'
 import Maquinas from './components/maquinas.vue'
@@ -85,6 +90,33 @@ function scrollToContacto() {
 function enviarFormulario() {
   alert('Mensaje enviado. Nos contactaremos contigo pronto.')
   formulario.value = { nombre: '', email: '', mensaje: '' }
+}
+
+function handleAbrirMaquinariaAgricola() {
+  mostrarMaquinariaAgricola.value = true
+  mostrarMaquinaria.value = false
+  nextTick(() => {
+    const el = document.querySelector('.tarjeta-maquinaria-agricola')
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  })
+}
+
+function handleAbrirMaquinariaIndustrial() {
+  mostrarMaquinaria.value = true
+  mostrarMaquinariaAgricola.value = false
+  nextTick(() => {
+    const el = document.querySelector('.tarjeta-maquinaria-industrial')
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  })
+}
+
+function handleAbrirPanaderia() {
+  mostrarMaquinaria.value = false
+  mostrarMaquinariaAgricola.value = false
+  nextTick(() => {
+    const el = document.querySelector('.tarjeta-panaderia')
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  })
 }
 </script>
 

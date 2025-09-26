@@ -4,7 +4,7 @@
 	border: 2px solid #061a4833;
 }
 .producto-tienda {
-	background: linear-gradient(120deg, #e0e7ff 60%, #f8fafc 100%);
+	background: #f3f4f6; /* gris claro, puedes ajustar el tono */
 	box-shadow: 0 12px 40px rgba(6,26,72,0.22);
 	border: 2.5px solid #061a48;
 	animation: fadeInAmpliado 0.4s cubic-bezier(.4,0,.2,1);
@@ -18,7 +18,7 @@
 	max-width: 500px;
 	width: 100%;
 	min-height: 420px;
-	background: linear-gradient(120deg, #e0e7ff 60%, #f8fafc 100%);
+	background: #f3f4f6; /* gris claro, igual que arriba */
 	box-shadow: 0 16px 48px rgba(6,26,72,0.28);
 	border: 3px solid #061a48;
 	animation: fadeInAmpliado 0.4s cubic-bezier(.4,0,.2,1);
@@ -116,7 +116,7 @@
 	}
 }
 .producto-tienda {
-	background: #fff;
+	background: #f3f4f6; /* también aquí, para sobrescribir el anterior si es necesario */
 	border-radius: 14px;
 	box-shadow: 0 2px 12px rgba(6,26,72,0.07);
 	padding: 1.5rem 1.2rem;
@@ -179,7 +179,7 @@
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background: #fff;
+	background: #f3f4f6; /* gris claro en vez de blanco */
 	z-index: 999;
 	overflow: auto;
 	margin: 0;
@@ -231,7 +231,7 @@
 	max-width: 540px;
 	height: 93vh;
 	margin: 70px auto 0 auto;
-	background: #fff;
+	background: #f3f4f6;
 	border-radius: 16px;
 	position: relative;
 	overflow: visible;

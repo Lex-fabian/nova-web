@@ -199,4 +199,35 @@ onUnmounted(() => {
 }
 .carousel-indicator.active { background: #2563eb; border-color: #2563eb; transform: scale(1.2); box-shadow: 0 2px 8px rgba(37,99,235,0.4); }
 .carousel-indicator:hover { transform: scale(1.1); }
+
+@media (max-width: 900px) {
+	.diapositivas-carrusel {
+		height: calc(60vh); /* menor altura en móvil */
+	}
+	.portada {
+		height: calc(60vh);
+		object-fit: cover;
+		object-position: center top; /* enfocar la parte superior en móvil */
+	}
+	.texto-carrusel {
+		font-size: 1.2rem;
+		max-width: 90vw;
+		top: 48%;
+	}
+	.carousel-control {
+		width: 40px;
+		height: 40px;
+		font-size: 1.4rem;
+		padding: 0.2em 0.5em;
+	}
+	.carousel-prev { left: 6px; }
+	.carousel-next { right: 6px; }
+	.carousel-indicators {
+		bottom: 3vh;
+	}
+	.carousel-indicator {
+		width: 10px;
+		height: 10px;
+	}
+}
 </style>

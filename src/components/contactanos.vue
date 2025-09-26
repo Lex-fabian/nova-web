@@ -44,22 +44,22 @@ function submitForm() {
   min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
-  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  background: #b1b2b3;
   padding: 2rem 1rem;
 }
 .container { max-width:1100px; margin:0 auto; width:100%; }
 .inner { display: grid; grid-template-columns: 1fr 460px; gap:2rem; align-items: center; }
-.left h2 { color: var(--primary,#2563eb); margin:0 0 0.75rem 0; font-size:2rem }
-.lead { color:#334155; font-size:1.05rem; margin-bottom:1rem }
+.left h2 { color: #1e3a8a; margin:0 0 0.75rem 0; font-size:2rem }
+.lead { color:#000000; font-size:1.05rem; margin-bottom:1rem }
 .redes { display:flex; gap:0.6rem; flex-wrap:wrap }
-.red { display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1rem; background:#fff; border-radius:8px; border:1px solid rgba(2,6,23,0.04); color:#0f172a; text-decoration:none; font-weight:600 }
-.red--whatsapp { background:#25D366; color:#fff; border-color:rgba(0,0,0,0.06) }
-.contact-form { background:#fff; padding:1.5rem; border-radius:12px; box-shadow:0 12px 40px rgba(2,6,23,0.06); display:flex; flex-direction:column; }
+.red { display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1rem; background:#fff; border-radius:8px; border:1px solid rgba(2,6,23,0.04); color:#000000; text-decoration:none; font-weight:600 }
+.red--whatsapp { background:#ffffff; color:#050505; border-color:rgba(0,0,0,0.06) }
+.contact-form { background:#1e3a8a; padding:1.5rem; border-radius:12px; box-shadow:0 12px 40px rgba(2,6,23,0.06); display:flex; flex-direction:column; }
 .fields { display:flex; flex-direction:column; gap:0.9rem; }
-.contact-form input, .contact-form textarea { padding:0.95rem; border-radius:10px; border:1px solid rgba(2,6,23,0.08); font-size:1rem }
-.contact-form textarea { min-height:180px; resize:vertical }
+.contact-form input, .contact-form textarea { padding:0.95rem; border-radius:10px; border:1px solid rgba(255,255,255,0.2); font-size:1rem; color:#ffffff; background:rgba(255,255,255,0.1) }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color:rgba(255,255,255,0.7) }
 .actions { display:flex; justify-content:flex-end; margin-top:0.5rem }
-.btn { background: linear-gradient(135deg,#2563eb 0%,#1e4fd6 100%); color:#fff; padding:0.9rem 1.2rem; border-radius:10px; border:none; font-weight:800; cursor:pointer }
+.btn { background: linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%); color:#fff; padding:0.9rem 1.2rem; border-radius:10px; border:none; font-weight:800; cursor:pointer }
 
 @media (max-width:980px) {
   .inner { grid-template-columns: 1fr; }
