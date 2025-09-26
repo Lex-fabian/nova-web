@@ -1,28 +1,46 @@
 <template>
-  <section class="contactanos" id="contacto" aria-labelledby="contacto-title">
-    <div class="container">
-      <div class="inner">
-        <div class="left">
-          <h2 id="contacto-title">Contáctanos</h2>
-          <p class="lead">¿Tienes alguna pregunta o necesitas más información sobre nuestros productos?</p>
-          <div class="redes">
-            <a class="red" href="https://www.facebook.com/p/Savreh-SA-61563909317105/" target="_blank" rel="noopener">Facebook</a>
-            <a class="red" href="https://www.instagram.com/savreh.ec/" target="_blank" rel="noopener">Instagram</a>
-            <a class="red" href="https://www.tiktok.com/@savreh.ec" target="_blank" rel="noopener">TikTok</a>
-            <a class="red red--whatsapp" href="https://wa.link/hj2t5j" target="_blank" rel="noopener">WhatsApp</a>
-          </div>
-        </div>
+  <section id="contacto" class="contacto-seccion" aria-labelledby="contacto-titulo">
+    <div class="contacto-contenedor">
+      <h2 id="contacto-titulo">Contáctanos</h2>
 
-        <form class="contact-form" @submit.prevent="submitForm" novalidate>
-          <div class="fields">
-            <input type="text" placeholder="Nombre" v-model="form.nombre" required />
-            <input type="email" placeholder="Email" v-model="form.email" required />
-            <textarea placeholder="Mensaje" v-model="form.mensaje" required></textarea>
-          </div>
-          <div class="actions">
-            <button type="submit" class="btn">Enviar Mensaje</button>
-          </div>
-        </form>
+      <form class="contacto-form" @submit.prevent="enviar">
+        <label>
+          <span class="label-text">Nombre</span>
+          <input v-model="form.nombre" type="text" required />
+        </label>
+
+        <label>
+          <span class="label-text">Email</span>
+          <input v-model="form.email" type="email" required />
+        </label>
+
+        <label>
+          <span class="label-text">Mensaje</span>
+          <textarea v-model="form.mensaje" rows="5" required></textarea>
+        </label>
+
+        <div class="acciones">
+          <button type="submit" class="btn-enviar">Enviar</button>
+        </div>
+      </form>
+
+      <div class="social-row" aria-hidden="false">
+        <a href="#" class="social" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8.5v-2.9h2V9.2c0-2 1.2-3.1 3-3.1.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.62-1.3 1.25v1.56h2.2l-.35 2.9H14v7A10 10 0 0022 12z"/></svg>
+          <span class="social-label">Facebook</span>
+        </a>
+        <a href="#" class="social" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm6.5-.9a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0zM12 9.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5z"/></svg>
+          <span class="social-label">Instagram</span>
+        </a>
+        <a href="#" class="social social-tiktok" aria-label="TikTok" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 3v9.2a3.8 3.8 0 11-3.8-3.8V8.2a6 6 0 006 6V3h-2.2z"/></svg>
+          <span class="social-label">TikTok</span>
+        </a>
+        <a href="https://wa.link/hj2t5j" class="social whatsapp-social" aria-label="WhatsApp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+          <span class="social-label">WhatsApp</span>
+        </a>
       </div>
     </div>
   </section>
@@ -31,8 +49,9 @@
 <script setup>
 import { reactive } from 'vue'
 const form = reactive({ nombre: '', email: '', mensaje: '' })
-function submitForm() {
-  alert('Mensaje enviado. Nos contactaremos pronto.')
+
+function enviar() {
+  alert('Mensaje enviado. Gracias.')
   form.nombre = ''
   form.email = ''
   form.mensaje = ''
@@ -40,32 +59,109 @@ function submitForm() {
 </script>
 
 <style scoped>
-.contactanos {
-  min-height: calc(100vh - 64px);
+.contacto-seccion {
+  padding: 2.4rem 1rem;
   display: flex;
-  align-items: center;
-  background: #b1b2b3;
-  padding: 2rem 1rem;
+  justify-content: center;
+  background: rgb(159, 156, 156);
 }
-.container { max-width:1100px; margin:0 auto; width:100%; }
-.inner { display: grid; grid-template-columns: 1fr 460px; gap:2rem; align-items: center; }
-.left h2 { color: #1e3a8a; margin:0 0 0.75rem 0; font-size:2rem }
-.lead { color:#000000; font-size:1.05rem; margin-bottom:1rem }
-.redes { display:flex; gap:0.6rem; flex-wrap:wrap }
-.red { display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1rem; background:#fff; border-radius:8px; border:1px solid rgba(2,6,23,0.04); color:#000000; text-decoration:none; font-weight:600 }
-.red--whatsapp { background:#ffffff; color:#050505; border-color:rgba(0,0,0,0.06) }
-.contact-form { background:#1e3a8a; padding:1.5rem; border-radius:12px; box-shadow:0 12px 40px rgba(2,6,23,0.06); display:flex; flex-direction:column; }
-.fields { display:flex; flex-direction:column; gap:0.9rem; }
-.contact-form input, .contact-form textarea { padding:0.95rem; border-radius:10px; border:1px solid rgba(255,255,255,0.2); font-size:1rem; color:#ffffff; background:rgba(255,255,255,0.1) }
-.contact-form input::placeholder, .contact-form textarea::placeholder { color:rgba(255,255,255,0.7) }
-.actions { display:flex; justify-content:flex-end; margin-top:0.5rem }
-.btn { background: linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%); color:#fff; padding:0.9rem 1.2rem; border-radius:10px; border:none; font-weight:800; cursor:pointer }
+.contacto-contenedor {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 0 auto;
+}
+#contacto-titulo {
+  font-size: 2.0rem;
+  margin: 0;
+  font-weight: 700;
+  text-align: center;
+  color: white !important;
+}
 
-@media (max-width:980px) {
-  .inner { grid-template-columns: 1fr; }
-  .contactanos { padding:1.5rem 1rem; }
-  .left { order: 2; text-align:center }
-  .contact-form { order: 1 }
-  .actions { justify-content:center }
+.contacto-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #082572;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(243, 240, 240, 0.08);
+}
+.label-text {
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+  color: #fcfcff;
+  font-weight: 600;
+}
+.contacto-form input,
+.contacto-form textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.7rem;
+  border: 1px solid rgba(6,26,72,0.12);
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+}
+.contacto-form textarea { resize: vertical; min-height: 120px; }
+
+.acciones { display:flex; justify-content:center; }
+.btn-enviar {
+  background: #feffff;
+  color: #082572;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.social-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #ffffff;
+  color: #082572;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(2,6,23,0.06);
+  height: 44px;
+}
+.social svg { width:18px; height:18px; flex: 0 0 18px; }
+.social-label { color: #082572; font-weight: 600; font-size: 0.95rem; line-height: 1; }
+
+.whatsapp-social { background: #ffffff; color: #082572; }
+.whatsapp-social .social-label { color: #082572; }
+
+.social-tiktok { display: none; }
+
+@media (max-width: 900px) {
+  .social-tiktok { display: inline-flex; }
+}
+
+@media (max-width: 520px) {
+  .contacto-contenedor { padding: 0 12px; }
+  #contacto-titulo { font-size: 1.4rem; }
+  .contacto-form { padding: 12px; }
+  .label-text { font-size: 0.95rem; }
+  .btn-enviar { width: 100%; }
+  .social-row { gap: 8px; margin-top: 0.5rem; }
+  .social { padding: 8px; height: 40px; }
+  .social-label { font-size: 0.85rem; display: inline-block; }
 }
 </style>

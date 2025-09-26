@@ -6,7 +6,7 @@
     @abrir-panaderia="handleAbrirPanaderia"
   />
 
-	<main style="margin-top:64px; background: #f3f4f6;">
+	<main style="margin-top:64px; margin-bottom:64px; background: #f3f4f6;">
 		<Portada />
 
 		<Maquinas @open-maquinaria="mostrarMaquinaria = true" />
@@ -29,8 +29,6 @@
 
 		<Nosotros />
 
-		<Contactanos />
-
 		<a
 			href="https://wa.link/hj2t5j"
 			class="whatsapp-flotante"
@@ -43,7 +41,8 @@
 			</svg>
 		</a>
 
-		<Pie />
+		<Contactanos />
+		<Pie @ir-inicio="scrollToInicio" />
 	</main>
 </template>
 
@@ -121,19 +120,17 @@ function handleAbrirPanaderia() {
 </script>
 
 <style scoped>
-/* Botón flotante de WhatsApp en la esquina inferior derecha */
 .whatsapp-flotante {
 	position: fixed;
 	right: 18px;
-	bottom: 18px;
-	width: 56px;
-	height: 56px;
-	background: #25D366; /* color WhatsApp */
+	bottom: 8px;
+	width: 46px;
+	height: 46px;
+	background: #25D366; 
 	color: #fff;
 	border-radius: 50%;
 	display: inline-grid;
 	place-items: center;
-	box-shadow: 0 6px 18px rgba(2, 6, 23, 0.25);
 	z-index: 9999;
 	text-decoration: none;
 }
@@ -141,6 +138,6 @@ function handleAbrirPanaderia() {
 .whatsapp-flotante svg { width: 28px; height: 28px; display: block; }
 
 @media (max-width: 520px) {
-	.whatsapp-flotante { right: 12px; bottom: 12px; width: 48px; height: 48px; }
+	.whatsapp-flotante { right: 12px; bottom: 6px; width: 48px; height: 48px; } /* ajustado para móvil */
 }
 </style>
