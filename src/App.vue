@@ -135,9 +135,15 @@ function handleAbrirPanaderia() {
 	text-decoration: none;
 }
 
-.whatsapp-flotante svg { width: 28px; height: 28px; display: block; }
+.whatsapp-flotante svg {
+	width: 28px;
+	height: 28px;
+	display: block;
+	fill: #fff !important;
+	stroke: none !important;
+}
 
 @media (max-width: 520px) {
-	.whatsapp-flotante { right: 12px; bottom: 6px; width: 48px; height: 48px; } /* ajustado para móvil */
+	.whatsapp-flotante { right: 12px; bottom: 6px; width: 48px; height: 48px; } 
 }
 </style>
